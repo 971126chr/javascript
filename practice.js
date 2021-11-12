@@ -56,3 +56,56 @@ console.log(player.name);
 
 player.happy = "no";
 console.log(player);
+
+//function 공부
+
+function sayHello(nameOfPerson, age){
+    console.log("Hello my name is " + nameOfPerson + " and I'm " + age);
+}
+
+sayHello("Hye Ryeong", 25);
+sayHello("sumin", 28);
+
+function plus(a, b) {
+    console.log(a + b);
+}
+
+plus(25, 28);
+
+const player = {
+    name: "HR",
+    sayHello: function(otherPersonsName){
+        console.log("Hello! " + otherPersonsName + " nice to meet you");
+    },
+};
+
+console.log(player.name);
+player.sayHello("sum");
+
+// a + b, a - b, a / b, a**b 나타내보기 예제
+
+//내가 한 것
+function example(a ,b) {
+    console.log(a + b);
+    console.log(a - b);
+    console.log(a ** b);
+}
+
+example (3, 7);
+
+//노마드코더에서 object 사용하여 만들라고 한 것!
+const calculater = {
+    add: function(a, b) {
+        console.log(a + b);
+    },
+    minus: function(a, b) {
+        console.log(a - b);
+    },
+    squared: function(a, b) {
+        console.log(a ** b);
+    },
+}
+
+calculater.add(3,7);
+calculater.minus(3,7);
+calculater.squared(3,7);

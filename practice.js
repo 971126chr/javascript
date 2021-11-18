@@ -163,6 +163,8 @@ const age = parseInt(prompt("How old are you?"));
 
 console.log(isNaN(age));
 
+//조건문 if와 else 공부
+
 const age = parseInt(prompt("How old are you?"));
 
 if(isNaN(age)) {
@@ -170,6 +172,8 @@ if(isNaN(age)) {
 } else {
     console.log("Thank you for writing your age.");
 }
+
+//조건문 else if 공부
 
 const age = parseInt(prompt("How old are you?"));
 
@@ -180,6 +184,8 @@ if(isNaN(age)) {
 } else {
     console.log("You can drink");
 }
+
+//조건문 and연산자와 or연산자 공부
 
 const age = parseInt(prompt("How old are you?"));
 
@@ -194,3 +200,29 @@ if(isNaN(age) || age < 0) {
 } else if(age > 80) {
     console.log("You can do whatever you want.");
 }
+
+// =와 !==와 ===의 차이 공부
+
+const age = parseInt(prompt("How old are you?"));
+
+if(isNaN(age) || age < 0) {
+    console.log("Please write a real positive number");
+} else if(age < 18) {
+    console.log("You are too young.");
+} else if(age >= 18 && age <= 50) {
+    console.log("You can drink");
+} else if(age > 50 && age <= 80) {
+    console.log("You should exercise");
+} else if(age === 100) {
+    console.log("WOW you are wise");
+} else if(age > 80) {
+    console.log("You can do whatever you want.");
+}
+
+//JS와 HTML 연결된 상태 공부하기
+
+const title = document.getElementById("title");
+
+title.innerText = "Got you!";
+
+console.log(title.className);

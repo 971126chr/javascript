@@ -221,8 +221,32 @@ if(isNaN(age) || age < 0) {
 
 //JS와 HTML 연결된 상태 공부하기
 
+//getElementById
 const title = document.getElementById("title");
 
 title.innerText = "Got you!";
 
 console.log(title.className);
+
+//getElementsByClassName
+const hellos = document.getElementsByClassName("hello");
+
+console.log(hellos);
+
+//querySelector 공부
+const title = document.querySelector(".hello h1");
+
+console.log(title);
+
+title.style.color = "blue";
+
+//event 공부
+
+//click event
+const title = document.querySelector(".hello h1");
+
+function handleTitleClick() {
+    title.style.color = "blue";
+}
+
+title.addEventListener("click", handleTitleClick);

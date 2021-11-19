@@ -39,4 +39,12 @@ const quotes = [
         quote: "풍요 속에서는 친구들이 나를 알게 되고, 역경 속에서는 내가 친구를 알게 된다.",
         author: "John Churton Collins"
     }
-]
+];
+
+const quote = document.querySelector("#quote span:first-child");
+const author = document.querySelector("#quote span:last-child");
+
+const todaysQuote = quotes[Math.floor(Math.random() * quotes.length)];
+
+quote.innerText = todaysQuote.quote;
+author.innerText = todaysQuote.author;

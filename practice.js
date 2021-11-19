@@ -259,6 +259,86 @@ function handleMouseLeave() {
     title.innerText = "Mouse is gone!";
 }
 
+//resisze event
+function handleWindowResize() {
+    document.body.style.backgroundColor = "tomato";
+}
+
+//copy event
+function handleWindowCopy() {
+    alert("copier!");
+}
+
+//offline event
+function handleWindowOffline() {
+    alert("SOS no WIFI");
+}
+
+//online event
+function handleWindowOnline() {
+    alert("ALL GOOD!");
+}
+
 title.addEventListener("click", handleTitleClick);
 title.addEventListener("mouseenter", handleMouseEnter);
 title.addEventListener("mouseleave", handleMouseLeave);
+
+window.addEventListener("resize", handleWindowResize);
+window.addEventListener("copy", handleWindowCopy);
+window.addEventListener("offline", handleWindowOffline);
+window.addEventListener("online", handleWindowOnline);
+
+//click event와 if-else 사용
+const h1 = document.querySelector(".hello h1");
+
+function handleTitleClick() {
+    const currentColor = h1.style.color;
+    let newColor;
+    if (currentColor === "blue") {
+        newColor = "red";
+    } else {
+        newColor = "blue";
+    }
+    h1.style.color = newColor;
+}
+
+h1.addEventListener("click", handleTitleClick);
+
+//click event를 이용한 css 접근법
+
+const h1 = document.querySelector(".hello h1");
+
+function handleTitleClick() {
+    const clickedClass = "active";
+    if (h1.className === clickedClass) {
+        h1.className = "";
+    } else {
+        h1.className = clickedClass;
+    }
+}
+
+h1.addEventListener("click", handleTitleClick);
+
+//classList 공부
+
+const h1 = document.querySelector(".hello h1");
+
+function handleTitleClick() {
+    const clickedClass = "active";
+    if (h1.classList.contains(clickedClass)) {
+        h1.classList.remove(clickedClass);
+    } else {
+        h1.classList.add(clickedClass);
+    }
+}
+
+h1.addEventListener("click", handleTitleClick);
+
+//classList toggle 공부
+const h1 = document.querySelector(".hello h1");
+
+function handleTitleClick() {
+    h1.classList.toggle("active");
+}
+
+h1.addEventListener("click", handleTitleClick);

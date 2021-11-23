@@ -10,10 +10,19 @@ modifybtn.className = "modify-btn";
 
 function onLoginSubmit(event) {
     event.preventDefault();
-    loginForm.classList.add("hidden");
+    loginForm.classList.add(HIDDEN_CLASSNAME);
     const username = loginInput.value;
     localStorage.setItem(USERNAME_KEY, username);
     paintGreetings(username);
+}
+
+function modifybtnClcik() {
+    greeting.classList.add(HIDDEN_CLASSNAME);
+    loginForm.classList.remove(HIDDEN_CLASSNAME);
+    const username = loginInput.value;
+    localStorage.removeItem(USERNAME_KEY, username);
+    loginInput.value=null;
+    localStorage.setItem(USERNAME_KEY, username);
 }
 
 function paintGreetings(username) {
@@ -22,6 +31,7 @@ function paintGreetings(username) {
     console.log(modifybtn);
     greeting.appendChild(modifybtn);
     modifybtn.innerText = "수정하기";
+    modifybtn.addEventListener("click", modifybtnClcik);
 }
 
 const savedUsername = localStorage.getItem(USERNAME_KEY);

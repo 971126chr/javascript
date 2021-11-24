@@ -26,7 +26,7 @@ body {
     border-radius: 50px 50px;
     font-size: 20px;
 }
-#login-form button, #greeting .modify-btn {
+#login-form button, #greeting .modify-btn, ul#todo-list li button.modify-todobtn {
     width: 100px;
     padding-left: 0;
     font-weight: bold;
@@ -54,6 +54,10 @@ ul#todo-list li {
     color: #ffffff;
     font-weight: bold;
     text-shadow: 2px 2px #000000;
+}
+ul#todo-list li button.modify-todobtn {
+    width: 70px;
+    font-size: 24px;
 }
 ul#todo-list li button {
     width: 50px;

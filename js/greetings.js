@@ -23,6 +23,7 @@ function modifybtnClcik() {
     localStorage.removeItem(USERNAME_KEY, username);
     loginInput.value=null;
     localStorage.setItem(USERNAME_KEY, username);
+    localStorage.getItem(username);
 }
 
 function paintGreetings(username) {

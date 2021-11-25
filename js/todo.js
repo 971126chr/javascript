@@ -1,6 +1,8 @@
 const toDoForm = document.getElementById("todo-form");
 const toDoInput = document.querySelector("#todo-form input");
 const toDoList = document.getElementById("todo-list");
+const modifyInput = document.createElement("input");
+modifyInput.setAttribute("type", "text");
 
 const TODOS_KEY = "todos";
 
@@ -28,12 +30,6 @@ function deleteToDo(event) {
     saveToDos();
 }
 
-function modifyToDo(paintToDo) {
-    const span = document.querySelector("li span");
-    span.remove();
-    modifyInput.classList.remove(HIDDEN_CLASSNAME);
-}
-
 function paintToDo(newToDo) {
     const li = document.createElement("li");
     li.id = newToDo.id;
@@ -46,11 +42,16 @@ function paintToDo(newToDo) {
     let button = document.createElement("button");
     button.innerText = "❌";
     button.addEventListener("click", deleteToDo);
-    const modifyInput = document.createElement("input");
-    modifyInput.setAttribute("type", "text");
     modifyInput.classList.add(HIDDEN_CLASSNAME);
     li.append(modifyInput, span, modifyToDoButton, button);
     toDoList.appendChild(li);
+}
+
+function modifyToDo(paintToDo) {
+    const span = document.querySelector("li span");
+    span.remove();
+    modifyInput.classList.remove(HIDDEN_CLASSNAME);
+    let modifyToDoButton = document.querySelector("#todo-list li button:nth-child(2)");
 }
 
 function handleToDoSubmit(event) {

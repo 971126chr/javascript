@@ -7,4 +7,4 @@ const bgImg = document.createElement("img");
 bgImg.src = `../img/${chosenImage}`;
 
 document.body.appendChild(bgImg);
-bgImg.className = "bgImg";
+bgImg.className = "bg-img";

@@ -13,26 +13,15 @@ function saveToDos() {
     localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
 }
 
-// function realDel(deleteToDo) {
-//     if (window.confirm("정말 삭제하시겠습니까?")) {
-//         const li = document.getElementsByTagName("li");
-//         console.log(li[0].getElementsByTagName("button"));
-//         console.log(li.childNodes('button'));
-//         li.remove();
-//     }
-// }
-
 function deleteToDo(event) {
     const li = event.target.parentElement;
-    
     console.log(li);
     toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id));
-    saveToDos();
-
     if (window.confirm("정말 삭제하시겠습니까?")) {
-        const li = document.getElementsByTagName("li");
-        console.log(li[0].getElementsByTagName("button"));
-        
+        li.remove();
+        saveToDos();
+        // const li = document.getElementsByTagName("li");
+        // console.log(li[0].getElementsByTagName("button"));
     }
 
 }
@@ -49,16 +38,9 @@ function paintToDo(newToDo) {
     let button = document.createElement("button");
     button.innerText = "❌";
     button.addEventListener("click", deleteToDo);
-    modifyInput.classList.add(HIDDEN_CLASSNAME);
-    li.append(modifyInput, span, modifyToDoButton, button);
+    // modifyInput.classList.add(HIDDEN_CLASSNAME);
+    li.append(span, modifyToDoButton, button);
     toDoList.append(li);
-}
-
-function modifyToDo(paintToDo) {
-    const ToDoSpan = document.querySelector("li span");
-    ToDoSpan.classList.add(HIDDEN_CLASSNAME);
-    modifyInput.classList.remove(HIDDEN_CLASSNAME);
-    let modifyToDoButton = document.querySelector("#todo-list li button:nth-child(2)");
 }
 
 const savedToDos = localStorage.getItem(TODOS_KEY);
@@ -78,10 +60,22 @@ function handleToDoSubmit(event) {
         text: newToDo,
         id: Date.now()
     }
-    console.log();
     toDos.push(newToDoObj);
     paintToDo(newToDoObj);
     saveToDos();
+}
+
+function modifyToDo(event) {
+    const li = event.target.parentElement;
+    console.log(li);
+    let ToDoSpan = li.childNodes[0];
+    // console.log(ToDoSpan[0]);
+    console.log()
+    // li.modifyInput.classList.remove(HIDDEN_CLASSNAME);
+    ToDoSpan.classList.add(HIDDEN_CLASSNAME);
+    let modifyToDoButton = document.querySelector("#todo-list li button:nth-child(2)");
+    console.log(li.childNodes);
+    li.prepend(modifyInput);
 }
 
 toDoForm.addEventListener("submit", handleToDoSubmit);

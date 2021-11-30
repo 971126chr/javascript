@@ -19,10 +19,6 @@ function onLoginSubmit(event) {
 function modifybtnClcik() {
     greeting.classList.add(HIDDEN_CLASSNAME);
     loginForm.classList.remove(HIDDEN_CLASSNAME);
-    const username = loginInput.value;
-    localStorage.setItem(USERNAME_KEY, username);
-    //username = null;
-    localStorage.removeItem(USERNAME_KEY, username);
 }
 
 function paintGreetings(username) {

@@ -44,10 +44,11 @@ body {
     font-size: 100px;
     text-align: center;
 }
-#todo-form input, .todo-modify-input {
+#todo-form input {
     width: 400px;
 }
 .todo-modify-input {
+    width: 300px;
     border-radius: 5px;
     padding-left: 5px;
 }

@@ -13,22 +13,28 @@ function saveToDos() {
     localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
 }
 
-function realDel(deleteToDo) {
-    if(confirm("정말 삭제하시겠습니까?")) {
-        return;
-    }
-    else {
-        //deleteToDo();
-        li.remove();
-    }
-}
+// function realDel(deleteToDo) {
+//     if (window.confirm("정말 삭제하시겠습니까?")) {
+//         const li = document.getElementsByTagName("li");
+//         console.log(li[0].getElementsByTagName("button"));
+//         console.log(li.childNodes('button'));
+//         li.remove();
+//     }
+// }
 
 function deleteToDo(event) {
     const li = event.target.parentElement;
-    realDel();
-    li.remove();
+    
+    console.log(li);
     toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id));
     saveToDos();
+
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+        const li = document.getElementsByTagName("li");
+        console.log(li[0].getElementsByTagName("button"));
+        
+    }
+
 }
 
 function paintToDo(newToDo) {

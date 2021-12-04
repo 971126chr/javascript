@@ -16,9 +16,12 @@ function onLoginSubmit(event) {
     paintGreetings(username);
 }
 
-function modifybtnClcik() {
+function modifybtnClick() {
     greeting.classList.add(HIDDEN_CLASSNAME);
     loginForm.classList.remove(HIDDEN_CLASSNAME);
+    const username = loginInput.value;
+    localStorage.setItem(USERNAME_KEY, username);
+    localStorage.removeItem(USERNAME_KEY, username);
 }
 
 function paintGreetings(username) {
@@ -27,7 +30,7 @@ function paintGreetings(username) {
     console.log(modifybtn);
     greeting.appendChild(modifybtn);
     modifybtn.innerText = "수정하기";
-    modifybtn.addEventListener("click", modifybtnClcik);
+    modifybtn.addEventListener("click", modifybtnClick);
 }
 
 const savedUsername = localStorage.getItem(USERNAME_KEY);

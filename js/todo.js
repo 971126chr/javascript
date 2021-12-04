@@ -70,7 +70,6 @@ function modifyToDo(event) {
     console.log(li);
     let ToDoSpan = li.childNodes[0];
     // console.log(ToDoSpan[0]);
-    console.log()
     // li.modifyInput.classList.remove(HIDDEN_CLASSNAME);
     ToDoSpan.classList.add(HIDDEN_CLASSNAME);
     let modifyToDoButton = document.querySelector("#todo-list li button:nth-child(2)");

@@ -75,20 +75,17 @@ function modifyToDo(event) {
     toDos.push(modifyToDoObj);
     toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id));
     li.id = modifyToDoObj.id;
-    saveToDos();
     console.log(modifyInput.value);
     localStorage.setItem(toDos, modifyInput.value);
     localStorage.removeItem(toDos, modifyInput.value);
     paintToDo;
-    // toDoSpan = modifyInput.value;
-
+    saveToDos();
 }
 
 toDoForm.addEventListener("submit", handleToDoSubmit);
 
 if (savedToDos !== null) {
     const parsedToDos = JSON.parse(savedToDos);
-    console.log(parsedToDos);
     toDos = parsedToDos;
     parsedToDos.forEach(paintToDo);
 }

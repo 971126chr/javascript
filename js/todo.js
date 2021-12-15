@@ -42,13 +42,6 @@ function paintToDo(newToDo) {
 
 const savedToDos = localStorage.getItem(TODOS_KEY);
 
-function modifyToDoBtnClick() {
-    localStorage.removeItem(toDos, saveToDos);
-    saveToDos = null;
-    localStorage.setItem(toDos, saveToDos);
-    toDos.push(modifyToDoObj);
-}
-
 function handleToDoSubmit(event) {
     event.preventDefault();
     const newToDo = toDoInput.value;
@@ -67,17 +60,14 @@ function modifyToDo(event) {
     let toDoSpan = li.childNodes[0];
     toDoSpan.classList.add(HIDDEN_CLASSNAME);
     li.prepend(modifyInput);
-    const modifyToDo = modifyInput.value;
-    const modifyToDoObj = {
-        text: modifyToDo,
-        id: Date.now()
-    }
-    toDos.push(modifyToDoObj);
     toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id));
-    li.id = modifyToDoObj.id;
+    // li.id = modifyToDoObj.id;
     console.log(modifyInput.value);
-    localStorage.setItem(toDos, modifyInput.value);
-    localStorage.removeItem(toDos, modifyInput.value);
+    if (window.event.keyCode == 13) {
+        localStorage.setItem(TODOS_KEY, modifyInput.valueo);
+    }
+    localStorage.getItem(TODOS_KEY, modifyInput.value);
+    // localStorage.getItem(toDos, modifyInput.value);
     paintToDo;
     saveToDos();
 }

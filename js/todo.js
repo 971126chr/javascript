@@ -63,13 +63,12 @@ function modifyToDo(event) {
     toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id));
     // li.id = modifyToDoObj.id;
     console.log(modifyInput.value);
-    if (window.event.keyCode == 13) {
-        localStorage.setItem(TODOS_KEY, modifyInput.valueo);
-    }
-    localStorage.getItem(TODOS_KEY, modifyInput.value);
+    // localStorage.getItem(TODOS_KEY, toDos);
     // localStorage.getItem(toDos, modifyInput.value);
+    localStorage.setItem(TODOS_KEY, modifyInput.value);
     paintToDo;
     saveToDos();
+    toDoSpan.classList.remove(HIDDEN_CLASSNAME);
 }
 
 toDoForm.addEventListener("submit", handleToDoSubmit);

@@ -10,6 +10,15 @@ function saveToDos() {
     localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
 }
 
+function deleteToDo(event) {
+    const li = event.target.parentElement;
+    toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id));
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+        li.remove();
+        saveToDos();
+    }
+}
+
 function paintToDo(newToDo) {
     const li = document.createElement("li");
     li.id = newToDo.id;
@@ -18,10 +27,10 @@ function paintToDo(newToDo) {
     let modifyToDoBtn = document.createElement("button");
     modifyToDoBtn.className = "modify-todobtn";
     modifyToDoBtn.innerText = "수정";
-    // modifyToDoBtn.addEventListener("click", modifyToDo);
+    modifyToDoBtn.addEventListener("click", modifyToDo);
     let delToDoBtn = document.createElement("button");
     delToDoBtn.innerText = "❌";
-    // delToDoBtn.addEventListener("click", deleteToDo);
+    delToDoBtn.addEventListener("click", deleteToDo);
     li.append(span, modifyToDoBtn, delToDoBtn);
     toDoList.append(li);
 }
@@ -39,6 +48,10 @@ function handleToDoSubmit(event) {
     toDos.push(newToDoObj);
     paintToDo(newToDoObj);
     saveToDos();
+}
+
+function modifyToDo(event) {
+    const li = event.target.parentElement;
 }
 
 toDoForm.addEventListener("submit", handleToDoSubmit);

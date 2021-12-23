@@ -5,12 +5,6 @@ const modifyInput = document.createElement("input");
 modifyInput.setAttribute("type", "text");
 modifyInput.className = "todo-modify-input";
 
-let modifyToDoBtn = document.createElement("button");
-modifyToDoBtn.className = "modify-todobtn";
-modifyToDoBtn.innerText = "수정";
-let delToDoBtn = document.createElement("button");
-delToDoBtn.innerText = "❌";
-
 let toDos = [];
 
 const TODOS_KEY = "todos";
@@ -33,6 +27,11 @@ function paintToDo(newToDo) {
     li.id = newToDo.id;
     const span = document.createElement("span");
     span.innerText = newToDo.text;
+    let modifyToDoBtn = document.createElement("button");
+    modifyToDoBtn.className = "modify-todobtn";
+    modifyToDoBtn.innerText = "수정";
+    let delToDoBtn = document.createElement("button");
+    delToDoBtn.innerText = "❌";
     modifyToDoBtn.addEventListener("click", modifyToDo);
     delToDoBtn.addEventListener("click", deleteToDo);
     li.append(span, modifyToDoBtn, delToDoBtn);
@@ -58,6 +57,7 @@ function modifyToDo(event) {
     const li = event.target.parentElement;
     let toDoSpan = li.childNodes[0];
     toDoSpan.classList.add(HIDDEN_CLASSNAME);
+    let modifyToDoBtn = document.querySelector(".modify-todobtn");
     modifyToDoBtn.classList.add(HIDDEN_CLASSNAME);
     toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id));
     let finishModifyBtn = document.createElement("button");
@@ -67,11 +67,18 @@ function modifyToDo(event) {
     console.log(finishModifyBtn);
     modifyInput.onkeydown = function finishModifyEnter() {
         if(window.event.keyCode == 13) {
-            console.log("hello");
             const newToDo = modifyInput.value;
-            localStorage.removeItem(TODOS_KEY, newToDo);
-            localStorage.setItem(TODOS_KEY, newToDo);
-            toDoSpan.classList.remove(HIDDEN_CLASSNAME);
+            toDos.push(newToDo);
+            localStorage.removeItem(TODOS_KEY, toDos);
+            // newToDo.split('.');
+            finishModifyBtn.className = HIDDEN_CLASSNAME;
+            modifyInput.className = HIDDEN_CLASSNAME;
+            const newToDoSpan = document.createElement("span");
+            newToDoSpan.innerHTML = newToDo;
+            li.prepend(newToDoSpan);
+            localStorage.setItem(TODOS_KEY, JSON.stringify(newToDo));
+            console.log(newToDo);
+            saveToDos();
         }
     }
 }

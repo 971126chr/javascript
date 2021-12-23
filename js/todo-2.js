@@ -54,35 +54,24 @@ function handleToDoSubmit(event) {
     saveToDos();
 }
 
-function finishModifyToDo(event) {
-    event.preventDefault();
-    const li = event.target.parentElement;
-    let toDoSpan = li.childNodes[0];
-    const newToDo = modifyInput.value;
-    localStorage.getItem(TODOS_KEY, newToDo);
-    toDoSpan.classList.remove(HIDDEN_CLASSNAME);
-    modifyToDoBtn.classList.add(HIDDEN_CLASSNAME);
-    li.prepend(toDoSpan, finishModifyBtn, delToDoBtn);
-    console.log(newToDo);
-}
-
 function modifyToDo(event) {
     const li = event.target.parentElement;
     let toDoSpan = li.childNodes[0];
     toDoSpan.classList.add(HIDDEN_CLASSNAME);
     modifyToDoBtn.classList.add(HIDDEN_CLASSNAME);
-    li.prepend(modifyInput);
     toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id));
     let finishModifyBtn = document.createElement("button");
-    finishModifyBtn.className = "modify-todobtn";
+    finishModifyBtn.className = "finish-modify-btn";
     finishModifyBtn.innerText = "수정 완료";
+    li.prepend(modifyInput, finishModifyBtn);
     console.log(finishModifyBtn);
-    finishModifyBtn.onkeydown = function (event) {
+    modifyInput.onkeydown = function finishModifyEnter() {
         if(window.event.keyCode == 13) {
+            console.log("hello");
             const newToDo = modifyInput.value;
-            localStorage.getItem(TODOS_KEY, newToDo);
+            localStorage.removeItem(TODOS_KEY, newToDo);
+            localStorage.setItem(TODOS_KEY, newToDo);
             toDoSpan.classList.remove(HIDDEN_CLASSNAME);
-            li.prepend(toDoSpan, finishModifyBtn, delToDoBtn);
         }
     }
 }

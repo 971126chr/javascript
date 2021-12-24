@@ -95,12 +95,10 @@ function modifyToDo(event) {
 function notModify(event) {
     const li = event.target.parentElement;
     toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id));
-    console.log(li.id);
     let toDoSpan = document.querySelector("li span");
     toDoSpan.classList.remove(HIDDEN_CLASSNAME);
     let modifyToDoBtn = document.querySelector(".modify-todobtn");
     modifyToDoBtn.classList.remove(HIDDEN_CLASSNAME);
-    modifyToDoBtn.classList.add("modify-todobtn");
     let delToDoBtn = document.querySelector("li .del-todobtn");
     modifyInput.classList.add(HIDDEN_CLASSNAME);
     let finishModifyBtn = document.querySelector(".finish-modify-btn");

@@ -57,13 +57,14 @@ function modifyToDo(event) {
     const li = event.target.parentElement;
     let toDoSpan = li.childNodes[0];
     toDoSpan.classList.add(HIDDEN_CLASSNAME);
-    let modifyToDoBtn = document.querySelector(".modify-todobtn");
-    modifyToDoBtn.classList.add(HIDDEN_CLASSNAME);
     toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id));
     let finishModifyBtn = document.createElement("button");
     finishModifyBtn.className = "finish-modify-btn";
     finishModifyBtn.innerText = "수정 완료";
     li.prepend(modifyInput, finishModifyBtn);
+    let modifyToDoBtn = document.querySelector(".modify-todobtn");
+    modifyToDoBtn.classList.add(HIDDEN_CLASSNAME);
+    modifyToDoBtn.classList.remove("modify-todobtn");
     console.log(finishModifyBtn);
     modifyInput.onkeydown = function finishModifyEnter() {
         if(window.event.keyCode == 13) {
@@ -81,6 +82,7 @@ function modifyToDo(event) {
             saveToDos();
         }
     }
+    toDoSpan.classList.remove(HIDDEN_CLASSNAME);
 }
 
 toDoForm.addEventListener("submit", handleToDoSubmit);

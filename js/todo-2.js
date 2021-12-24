@@ -32,6 +32,7 @@ function paintToDo(newToDo) {
     modifyToDoBtn.innerText = "수정";
     let delToDoBtn = document.createElement("button");
     delToDoBtn.innerText = "❌";
+    delToDoBtn.className = "del-todobtn";
     modifyToDoBtn.addEventListener("click", modifyToDo);
     delToDoBtn.addEventListener("click", deleteToDo);
     li.append(span, modifyToDoBtn, delToDoBtn);
@@ -64,12 +65,19 @@ function modifyToDo(event) {
     li.prepend(modifyInput, finishModifyBtn);
     let modifyToDoBtn = document.querySelector(".modify-todobtn");
     modifyToDoBtn.classList.add(HIDDEN_CLASSNAME);
-    modifyToDoBtn.classList.remove("modify-todobtn");
     console.log(finishModifyBtn);
+    modifyInput.focus();
+    modifyInput.value = toDoSpan.innerText;
+    modifyInput.addEventListener("blur", notModify);
     modifyInput.onkeydown = function finishModifyEnter() {
         if(window.event.keyCode == 13) {
             const newToDo = modifyInput.value;
-            toDos.push(newToDo);
+            toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id));
+            const newToDoObj = {
+                text: newToDo,
+                id: Date.now()
+            }
+            toDos.push(newToDoObj);
             localStorage.removeItem(TODOS_KEY, toDos);
             // newToDo.split('.');
             finishModifyBtn.className = HIDDEN_CLASSNAME;
@@ -82,7 +90,23 @@ function modifyToDo(event) {
             saveToDos();
         }
     }
+}
+
+function notModify(event) {
+    const li = event.target.parentElement;
+    toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id));
+    console.log(li.id);
+    let toDoSpan = document.querySelector("li span");
     toDoSpan.classList.remove(HIDDEN_CLASSNAME);
+    let modifyToDoBtn = document.querySelector(".modify-todobtn");
+    modifyToDoBtn.classList.remove(HIDDEN_CLASSNAME);
+    modifyToDoBtn.classList.add("modify-todobtn");
+    let delToDoBtn = document.querySelector("li .del-todobtn");
+    modifyInput.classList.add(HIDDEN_CLASSNAME);
+    let finishModifyBtn = document.querySelector(".finish-modify-btn");
+    finishModifyBtn.classList.add(HIDDEN_CLASSNAME);
+    // finishModifyBtn.classList.remove(".finish-modify-btn");
+    li.prepend(toDoSpan, modifyToDoBtn, delToDoBtn);
 }
 
 toDoForm.addEventListener("submit", handleToDoSubmit);

@@ -71,11 +71,13 @@ ul#todo-list li button.finish-modify-btn {
     letter-spacing: -2px;
 }
 ul#todo-list li button {
-    width: 50px;
     height: 50px;
     margin-left: 10px;
-    border: 2px solid rgb(90, 90, 158);
     border-radius: 50%;
+}
+ul#todo-list li button.del-todobtn {
+    width: 50px;
+    border: 2px solid rgb(90, 90, 158);
     background: white;
 }
 #quote, #weather {

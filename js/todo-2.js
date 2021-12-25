@@ -78,7 +78,7 @@ function modifyToDo(event) {
                 id: Date.now()
             }
             toDos.push(newToDoObj);
-            localStorage.removeItem(TODOS_KEY, toDos);
+            // localStorage.removeItem(TODOS_KEY, toDos);
             // newToDo.split('.');
             finishModifyBtn.className = HIDDEN_CLASSNAME;
             modifyInput.className = HIDDEN_CLASSNAME;
@@ -93,19 +93,17 @@ function modifyToDo(event) {
 }
 
 function notModify(event) {
-    const li = event.target.parentElement;
+    let li = event.target.parentElement;
     toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id));
-    console.log(li.id);
     let toDoSpan = document.querySelector("li span");
     toDoSpan.classList.remove(HIDDEN_CLASSNAME);
     let modifyToDoBtn = document.querySelector(".modify-todobtn");
     modifyToDoBtn.classList.remove(HIDDEN_CLASSNAME);
-    modifyToDoBtn.classList.add("modify-todobtn");
     let delToDoBtn = document.querySelector("li .del-todobtn");
     modifyInput.classList.add(HIDDEN_CLASSNAME);
-    let finishModifyBtn = document.querySelector(".finish-modify-btn");
+    let finishModifyBtn = document.querySelector("li .finish-modify-btn");
     finishModifyBtn.classList.add(HIDDEN_CLASSNAME);
-    // finishModifyBtn.classList.remove(".finish-modify-btn");
+    finishModifyBtn.classList.remove("finish-modify-btn");
     li.prepend(toDoSpan, modifyToDoBtn, delToDoBtn);
 }
 

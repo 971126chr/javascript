@@ -65,26 +65,39 @@ function handleToDoSubmit(event) {
 function modifyToDo(event) {
     const li = event.target.parentElement;
 
+    // toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id));
+
     let toDoValue = document.querySelector(".todo-value");
 
     let modifyInput = document.createElement("input");
     modifyInput.setAttribute("type", "text");
     modifyInput.className = "todo-modify-input";
     modifyInput.focus();
-    modifyInput.value = toDoValue.innerText;
+    modifyInput.value = event.target.previousSibling.innerText;
 
     const finishModifyBtn = document.createElement("button");
     finishModifyBtn.className = "finish-modify-btn";
     finishModifyBtn.innerText = "수정 완료";
 
     li.prepend(modifyInput, finishModifyBtn);
-    console.log(modifyInput.value);
-    console.log(toDoValue);
 
-    if (toDoValue !== event.target) {
+    event.target.previousSibling.classList.add(HIDDEN_CLASSNAME);
+    event.target.remove();
 
-        if (toDoValue && event.target) {
-            return;
+    if (toDoValue.innerText !== modifyInput.value) {
+
+        modifyInput.onkeydown = function finishModifyEnter() {
+            
+            finishModifyBtn.addEventListener("click", finishModifyEnter);
+
+            if(window.event.keyCode == 13) {
+                event.target.previousSibling.classList.remove(HIDDEN_CLASSNAME);
+            }
+        }
+
+
+        if (toDoValue && event.target.previousSibling) {
+
         }
 
     }

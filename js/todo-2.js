@@ -25,7 +25,7 @@ function paintToDo(newToDo) {
     const li = document.createElement("li");
     li.id = newToDo.id;
 
-    const toDoSpan = document.createElement("span");
+    let toDoSpan = document.createElement("span");
     toDoSpan.className = "todo-value";
     toDoSpan.innerText = newToDo.text;
 
@@ -65,9 +65,9 @@ function handleToDoSubmit(event) {
 function modifyToDo(event) {
     const li = event.target.parentElement;
 
-    // toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id));
+    toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id));
 
-    let toDoValue = document.querySelector(".todo-value");
+    let toDoValue = document.querySelectorAll(".todo-value");
 
     let modifyInput = document.createElement("input");
     modifyInput.setAttribute("type", "text");
@@ -78,28 +78,26 @@ function modifyToDo(event) {
     const finishModifyBtn = document.createElement("button");
     finishModifyBtn.className = "finish-modify-btn";
     finishModifyBtn.innerText = "수정 완료";
-
-    li.prepend(modifyInput, finishModifyBtn);
-
+    
+    // toDoValue.classList.add(HIDDEN_CLASSNAME);
     event.target.previousSibling.classList.add(HIDDEN_CLASSNAME);
     event.target.remove();
+
+    li.prepend(modifyInput, finishModifyBtn);
 
     if (toDoValue.innerText !== modifyInput.value) {
 
         modifyInput.onkeydown = function finishModifyEnter() {
-            
-            finishModifyBtn.addEventListener("click", finishModifyEnter);
 
             if(window.event.keyCode == 13) {
-                event.target.previousSibling.classList.remove(HIDDEN_CLASSNAME);
+                toDoValue.classList.remove(HIDDEN_CLASSNAME);
             }
+            console.log(modifyInput);
         }
-
-
-        if (toDoValue && event.target.previousSibling) {
+        if (toDoValue.innerText === modifyInput.value) {
 
         }
-
+        console.log(toDoValue);
     }
 }
 

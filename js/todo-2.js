@@ -65,40 +65,63 @@ function handleToDoSubmit(event) {
 function modifyToDo(event) {
     const li = event.target.parentElement;
 
-    toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id));
-
-    let toDoValue = document.querySelectorAll(".todo-value");
-
     let modifyInput = document.createElement("input");
     modifyInput.setAttribute("type", "text");
     modifyInput.className = "todo-modify-input";
     modifyInput.focus();
     modifyInput.value = event.target.previousSibling.innerText;
+    
+    let toDoSpan = document.getElementsByClassName("todo-value");
 
     const finishModifyBtn = document.createElement("button");
     finishModifyBtn.className = "finish-modify-btn";
     finishModifyBtn.innerText = "수정 완료";
     
-    // toDoValue.classList.add(HIDDEN_CLASSNAME);
-    event.target.previousSibling.classList.add(HIDDEN_CLASSNAME);
-    event.target.remove();
+    // let modifyToDoBtnClick = event.target && event.target.previousSibling;
+    // modifyToDoBtnClick.classList.add(HIDDEN_CLASSNAME);
+    
+    // let modifyToDoBtnClick = document.createElement("div");
+    // modifyToDoBtnClick.append(toDoSpan, event.target);
+    // modifyToDoBtnClick.classList.add(HIDDEN_CLASSNAME);
 
     li.prepend(modifyInput, finishModifyBtn);
 
-    if (toDoValue.innerText !== modifyInput.value) {
-
+    if (toDoSpan.innerText !== modifyInput.value) {
         modifyInput.onkeydown = function finishModifyEnter() {
 
             if(window.event.keyCode == 13) {
-                toDoValue.classList.remove(HIDDEN_CLASSNAME);
+                modifyInput.classList.add(HIDDEN_CLASSNAME);
+    
+                let newToDoSpan = document.createElement("span");
+                newToDoSpan.innerText = modifyInput.value;
+    
+                finishModifyBtn.classList.add(HIDDEN_CLASSNAME);
+    
+                li.prepend(newToDoSpan, event.target);
+    
+                toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id));
+    
+                const newToDoObj = {
+                    text: modifyInput.value,
+                    id: Date.now()
+                }
+                
+                toDos.push(newToDoObj);
+                localStorage.setItem(TODOS_KEY, newToDoObj);
+                
+                // localStorage.setItem(TODOS_KEY, newToDo.text);
+    
+                // let finishModify = document.createElement("div");
+                // finishModify.append(modifyInput, finishModifyBtn);
+                // finishModify.className = "modify-todobtn-click";
+    
             }
-            console.log(modifyInput);
         }
-        if (toDoValue.innerText === modifyInput.value) {
-
-        }
-        console.log(toDoValue);
     }
+
+    
+    event.target.previousSibling.remove();
+    event.target.remove();
 }
 
 // function modifyToDo(event) {
